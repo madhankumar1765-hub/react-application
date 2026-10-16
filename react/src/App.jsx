@@ -145,73 +145,249 @@
 
 //task 2
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
 
-const App = () => {
-  const [counter, setCounter] = useState(0);
-  const [data, setData] = useState([]);
+// const App = () => {
+//   const [counter, setCounter] = useState(0);
+//   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/users'
-      );
-      const users = await response.json();
-      setData(users);
-    };
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       const response = await fetch(
+//         'https://jsonplaceholder.typicode.com/users'
+//       );
+//       const users = await response.json();
+//       setData(users);
+//     };
 
-    fetchData();
-  }, []);
+//     fetchData();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h2>Counter: {counter}</h2>
+
+//       <button onClick={() => setCounter(counter + 1)}>
+//         Increment
+//       </button>
+
+//       <button onClick={() => setCounter(counter - 1)}>
+//         Decrement
+//       </button>
+
+//       <h2>User Details</h2>
+
+//       <table border="" >
+//         <thead>
+//           <tr>
+//             <th>ID</th>
+//             <th>Name</th>
+//             <th>Email</th>
+//             <th>Phone</th>
+//             <th>Street</th>
+//             <th>Suite</th>
+//             <th>City</th>
+//             <th>Zipcode</th>
+//             <th>Latitude</th>
+//             <th>Longitude</th>
+//           </tr>
+//         </thead>
+
+//         <tbody>
+//           {data.map((user) => (
+//             <tr key={user.id}>
+//               <td>{user.id}</td>
+//               <td>{user.name}</td>
+//               <td>{user.email}</td>
+//               <td>{user.phone}</td>
+//               <td>{user.address.street}</td>
+//               <td>{user.address.suite}</td>
+//               <td>{user.address.city}</td>
+//               <td>{user.address.zipcode}</td>
+//               <td>{user.address.geo.lat}</td>
+//               <td>{user.address.geo.lng}</td>
+//             </tr>
+//           ))}
+//         </tbody>
+//       </table>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+
+
+
+
+
+//assignment
+
+
+
+// import { useState, useEffect } from "react";
+
+// function App() {
+//   const [data, setData] = useState([]);
+//   const [search, setSearch] = useState("");
+//   const [loading, setLoading] = useState(true);
+//   const [status,setStatus] = useState(0)
+//   useEffect(() => {
+//     fetch("https://dummyjson.com/products/category/smartphones")
+//       .then((res) => {
+//         console.log(res,"response");
+//         setStatus(res.status
+
+//         )
+//         res.json()})
+//       .then((result) => {setData(result.products)})
+//       .finally(() => setLoading(false));
+//   }, []);
+
+//   const result = data.filter((p) =>
+//     p.title.toLowerCase().includes(search.toLowerCase())
+//   );
+
+//   if (loading) return <h2>Loading...</h2>;
+
+//   return (
+//     <div style={{ textAlign: "center" }}>
+//       <h1>Mobile Store 📱</h1>
+
+//       <input
+//         type="text"
+//         placeholder="Search mobiles"
+//         value={search}
+//         onChange={(e) => setSearch(e.target.value)}
+//       />
+
+//       {result.length === 0 ? (
+//         <h2>No Data Found</h2>
+//       ) : (
+//         result.map((p) => (
+//           <div key={p.id}>
+//             <img src={p.thumbnail} width="150" alt={p.title} />
+//             <h3>{p.title}</h3>
+//             <p>Price: {p.price}</p>
+//             <p>Rating: {p.rating}</p>
+//           </div>
+//         ))
+//       )}
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+
+
+
+
+
+
+//task1
+
+// import { useState } from "react";
+// import Title from "./Title.jsx";
+
+// function App() {
+//   const [count, setCount] = useState(0);
+//   return (
+//     <div>
+//       <Title count={count} />
+//       <button onClick={() => setCount(count + 1)}>Count is {count}</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+
+//task 2
+
+// import { useState } from "react";
+
+// function App() {
+//   const [name, setName] = useState("");
+
+//   return (
+//     <div>
+//       <h1>Enter Your Name</h1>
+      
+//       <input
+//         type="text"
+//         placeholder="Enter your name"
+//         value={name}
+//         onChange={(e) => setName(e.target.value)}
+//       />
+
+
+//       <h2>Your Name: {name}</h2>
+      
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
+//task3
+
+import { useState } from "react";
+
+function App() {
+  const [form, setForm] = useState({
+    firstName: "",
+    email: "",
+    age: ""
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prevForm) => ({
+      ...prevForm,
+      [name]: value
+    }));
+  };
 
   return (
     <div>
-      <h2>Counter: {counter}</h2>
+      <h1>Enter Your Information</h1>
 
-      <button onClick={() => setCounter(counter + 1)}>
-        Increment
+      <input type="text" placeholder="First Name"
+        name="firstName" value={form.firstName}
+        onChange={handleChange} />
+      <br /><br />
+
+      <input type="email" placeholder="Email"
+        name="email" value={form.email}
+        onChange={handleChange} />
+      <br /><br />
+
+      <input type="number" placeholder="Age"
+        name="age" value={form.age}
+        onChange={handleChange} />
+      <br /><br />
+
+      <button onClick={() => setSubmitted(true)}>
+        Submit
       </button>
 
-      <button onClick={() => setCounter(counter - 1)}>
-        Decrement
-      </button>
-
-      <h2>User Details</h2>
-
-      <table border="" >
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Street</th>
-            <th>Suite</th>
-            <th>City</th>
-            <th>Zipcode</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.phone}</td>
-              <td>{user.address.street}</td>
-              <td>{user.address.suite}</td>
-              <td>{user.address.city}</td>
-              <td>{user.address.zipcode}</td>
-              <td>{user.address.geo.lat}</td>
-              <td>{user.address.geo.lng}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {submitted && (
+        <div>
+          <h2>Submitted Details</h2>
+          <p>First Name: {form.firstName}</p>
+          <p>Email: {form.email}</p>
+          <p>Age: {form.age}</p>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default App;
